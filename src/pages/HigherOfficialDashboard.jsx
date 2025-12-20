@@ -1,21 +1,20 @@
 import Navbar from "../components/Navbar";
 import ComplaintCard from "../components/ComplaintCard";
 
-function OfficerDashboard() {
-  const dummyComplaints = [
-    { title: "Water Leakage", description: "Pipe leakage near park", status: "Pending", isEscalated: false },
-    { title: "Street Light Issue", description: "5th street not working", status: "Pending", isEscalated: false }
+function HigherOfficialDashboard() {
+  const escalatedComplaints = [
+    { title: "Road Damage", description: "Potholes on Main Road", status: "Pending", isEscalated: true }
   ];
 
   return (
     <div>
-      <Navbar role="officer"/>
+      <Navbar role="higher"/>
       <div className="max-w-2xl mx-auto mt-10">
-        <h2 className="text-2xl font-bold mb-4">Officer Dashboard</h2>
-        {dummyComplaints.map((c,i) => <ComplaintCard key={i} complaint={c} />)}
+        <h2 className="text-2xl font-bold mb-4">Higher Official Dashboard</h2>
+        {escalatedComplaints.map((c,i) => <ComplaintCard key={i} complaint={c} />)}
       </div>
     </div>
   );
 }
 
-export default OfficerDashboard;
+export default HigherOfficialDashboard;
