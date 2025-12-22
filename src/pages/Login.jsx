@@ -1,27 +1,38 @@
 import { useState } from "react";
-import Navbar from "../components/Navbar";
+import API from "../Api";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleLogin = () => {
-    console.log("Email:", email, "Password:", password);
-    alert("Login clicked (temporary)");
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await API.post("/auth/login", { email, password });
+      localStorage.setItem("token", res.data.token);
+      navigate("/add-complaint");
+    } catch (err) {
+      alert("Login failed");
+    }
   };
 
   return (
-    <div>
-      <Navbar />
-      <div className="max-w-md mx-auto mt-10 p-6 border rounded shadow">
-        <h2 className="text-2xl font-bold mb-4">Login</h2>
-        <input className="w-full p-2 mb-2 border rounded" placeholder="Email" 
-               onChange={e => setEmail(e.target.value)} />
-        <input className="w-full p-2 mb-2 border rounded" placeholder="Password" type="password"
-               onChange={e => setPassword(e.target.value)} />
-        <button className="bg-blue-600 text-white p-2 rounded w-full" onClick={handleLogin}>Login</button>
-      </div>
-    </div>
+    <form onSubmit={handleLogin}>
+      <input
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button type="submit">Login</button>
+    </form>
   );
 }
 

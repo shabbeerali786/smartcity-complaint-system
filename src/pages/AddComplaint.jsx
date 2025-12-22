@@ -1,26 +1,52 @@
 import { useState } from "react";
-import Navbar from "../components/Navbar";
+import API from "../Api";
 
 function AddComplaint() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleSubmit = () => {
-    console.log("Title:", title, "Description:", description);
-    alert("Complaint added (temporary)");
+  const submitComplaint = async (e) => {
+    e.preventDefault();
+
+    try {
+      await API.post("/complaints", {
+        title,
+        description,
+      });
+
+      alert("Complaint submitted successfully ✅");
+      setTitle("");
+      setDescription("");
+    } catch (error) {
+      alert("Error submitting complaint ❌");
+      console.log(error);
+    }
   };
 
   return (
-    <div>
-      <Navbar role="citizen"/>
-      <div className="max-w-md mx-auto mt-10 p-6 border rounded shadow">
-        <h2 className="text-2xl font-bold mb-4">Add Complaint</h2>
-        <input className="w-full p-2 mb-2 border rounded" placeholder="Title" 
-               onChange={e => setTitle(e.target.value)} />
-        <textarea className="w-full p-2 mb-2 border rounded" placeholder="Description" 
-                  onChange={e => setDescription(e.target.value)} />
-        <button className="bg-blue-600 text-white p-2 rounded w-full" onClick={handleSubmit}>Submit</button>
-      </div>
+    <div style={{ padding: "20px" }}>
+      <h2>Add Complaint</h2>
+
+      <form onSubmit={submitComplaint}>
+        <input
+          type="text"
+          placeholder="Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+        <br /><br />
+
+        <textarea
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        />
+        <br /><br />
+
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 }

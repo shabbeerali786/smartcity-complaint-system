@@ -1,6 +1,16 @@
 import axios from "axios";
 
-// Backend illa irundha temp URL use pannunga
-const API = axios.create({ baseURL: "http://localhost:5000/api" });
+const API = axios.create({
+  baseURL: process.env.REACT_APP_API_URL || "/api",
+});
+
+// token auto attach
+API.interceptors.request.use((req) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    req.headers.Authorization = `Bearer ${token}`;
+  }
+  return req;
+});
 
 export default API;
