@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import ComplaintCard from "../components/ComplaintCard";
 
 function MyComplaints() {
@@ -10,7 +9,6 @@ function MyComplaints() {
 
   return (
     <div>
-      <Navbar role="citizen"/>
       <div className="max-w-2xl mx-auto mt-10">
         <h2 className="text-2xl font-bold mb-4">My Complaints</h2>
         {dummyData.map((c, i) => <ComplaintCard key={i} complaint={c} />)}

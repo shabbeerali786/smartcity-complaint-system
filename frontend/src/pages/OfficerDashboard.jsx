@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import ComplaintCard from "../components/ComplaintCard";
 
 function OfficerDashboard() {
@@ -9,7 +8,6 @@ function OfficerDashboard() {
 
   return (
     <div>
-      <Navbar role="officer"/>
       <div className="max-w-2xl mx-auto mt-10">
         <h2 className="text-2xl font-bold mb-4">Officer Dashboard</h2>
         {dummyComplaints.map((c,i) => <ComplaintCard key={i} complaint={c} />)}
