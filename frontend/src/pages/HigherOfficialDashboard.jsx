@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import ComplaintCard from "../components/ComplaintCard";
 
 function HigherOfficialDashboard() {
@@ -8,7 +7,6 @@ function HigherOfficialDashboard() {
 
   return (
     <div>
-      <Navbar role="higher"/>
       <div className="max-w-2xl mx-auto mt-10">
         <h2 className="text-2xl font-bold mb-4">Higher Official Dashboard</h2>
         {escalatedComplaints.map((c,i) => <ComplaintCard key={i} complaint={c} />)}
